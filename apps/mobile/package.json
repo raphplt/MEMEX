@@ -22,14 +22,16 @@
     "expo-modules-core": "latest",
     "expo-router": "latest",
     "expo-status-bar": "latest",
+    "invariant": "^2.2.4",
     "nativewind": "latest",
     "@react-navigation/native": "latest",
     "react": "19.1.0",
-    "react-native": "0.81.0",
+    "react-devtools-core": "latest",
+    "react-native": "0.81.5",
     "react-native-css-interop": "latest",
-    "react-native-reanimated": "latest",
+    "react-native-reanimated": "~4.1.1",
     "react-native-safe-area-context": "latest",
-    "react-native-screens": "latest",
+    "react-native-screens": "~4.16.0",
     "tailwind-merge": "latest",
     "whatwg-fetch": "latest",
     "zustand": "latest"
@@ -37,7 +39,7 @@
   "devDependencies": {
     "@babel/core": "latest",
     "@memex/config": "workspace:*",
-    "@types/react": "latest",
+    "@types/react": "~19.1.10",
     "tailwindcss": "^3.4.0",
     "typescript": "latest"
   }
