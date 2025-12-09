@@ -16,7 +16,11 @@
     "eslint": "latest",
     "typescript": "latest"
   },
-  "packageManager": "pnpm@9.0.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "packageManager": "npm@11.3.0",
   "engines": {
     "node": ">=18"
   }

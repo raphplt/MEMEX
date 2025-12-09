@@ -13,7 +13,7 @@
         "class-transformer": "latest"
     },
     "devDependencies": {
-        "@memex/config": "workspace:*",
+        "@memex/config": "*",
         "typescript": "latest"
     }
 }
