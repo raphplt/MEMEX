@@ -13,7 +13,6 @@ import { useFeed } from "../../hooks/useFeed";
 
 const { height } = Dimensions.get("window");
 const TAB_BAR_HEIGHT = 49 + 34;
-const ITEM_HEIGHT = height - TAB_BAR_HEIGHT;
 
 export default function FeedScreen() {
 	const { data, fetchNextPage, hasNextPage, isLoading } = useFeed();
