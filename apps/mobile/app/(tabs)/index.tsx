@@ -11,8 +11,6 @@ import { FeedItem } from "../../components/FeedItem";
 import { ICard } from "@memex/shared";
 import { useFeed } from "../../hooks/useFeed";
 
-const { height } = Dimensions.get("window");
-const TAB_BAR_HEIGHT = 49 + 34;
 
 export default function FeedScreen() {
 	const { data, fetchNextPage, hasNextPage, isLoading } = useFeed();

@@ -16,6 +16,13 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
    npx expo start
    ```
 
+## API configuration
+
+The app fetches the feed from the Nest API (`GET /feed`).
+
+- Create an env file (optional): copy `.env.example` to `.env` and set `EXPO_PUBLIC_API_URL`.
+- If not set, the app will try to infer your dev machine IP from Expo and fallback to `http://localhost:3000`.
+
 In the output, you'll find options to open the app in a
 
 - [development build](https://docs.expo.dev/develop/development-builds/introduction/)
