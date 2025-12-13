@@ -1,50 +1,48 @@
-# 🧠 MEMEX (Project Name)
+# 🧠 MEMEX
 
 > **Le TikTok de l'intelligence.**
-> Une plateforme de micro-learning social qui transforme le doomscrolling en apprentissage actif.
+> Une plateforme de micro-learning social qui transforme le doomscrolling en apprentissage actif via un flux infini de connaissances vérifiées.
 
-![Status](https://img.shields.io/badge/Status-Development-blue)
-![Stack](https://img.shields.io/badge/Stack-Fullstack-yellow)
-![License](https://img.shields.io/badge/License-MIT%20%2F%20CC%20BY--SA-green)
+![Status](https://img.shields.io/badge/Status-POC%20%2F%20Alpha-orange)
+![Stack](https://img.shields.io/badge/Stack-Fullstack-blue)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ## 📋 À Propos
 
-**MEMEX** est une application mobile visant à démocratiser l'excellence culturelle et scolaire. Contrairement aux réseaux sociaux classiques, notre algorithme ne maximise pas seulement l'engagement, mais **l'acquisition de connaissances**.
+**MEMEX** est une application mobile visant à démocratiser l'excellence culturelle. Notre moteur ne maximise pas seulement l'engagement, mais **l'acquisition de connaissances**.
 
 ### Core Concept : Le "Smart Feed"
 
-Un flux infini et hybride qui mélange intelligemment :
+Le backend n'est pas un simple miroir de Wikipédia. C'est un **Hub de Connaissance** intelligent qui agrège, filtre et sert :
 
-1. **🔭 Découverte (70%)** : Micro-fiches (Maths, Histoire, Tech, Culture G).
-2. **🧠 Répétition (20%)** : Fiches déjà vues réapparaissant au moment critique (SRS - Spaced Repetition) pour l'ancrage mémoriel.
-3. **🎮 Challenge (10%)** : Quiz et Flashcards interactifs intégrés directement dans le scroll.
-
----
-
-## ✨ Fonctionnalités Clés
-
-- **Feed Haute Performance :** Scroll vertical fluide type TikTok (basé sur `@shopify/flash-list`).
-- **Contenu Multi-Sources :** Agrégation de Wikipédia (via API) et de contenus éducatifs certifiés (Maths, Grammaire, Code).
-- **Filtres de Niveau :** Personnalisation du contenu selon le profil (Collège, Lycée, Expert).
-- **Gamification :** XP, Streaks (série de jours), et Badges de connaissances.
-- **Social Learning :** Commentaires, partages, et favoris (Collections).
+1.  **🔭 Découverte (70%)** : Articles Wikipédia enrichis et filtrés (Maths, Histoire, Tech).
+2.  **🧠 Répétition (20%)** : Fiches déjà vues réapparaissant au moment critique (SRS - Spaced Repetition).
+3.  **🎮 Challenge (10%)** : Quiz interactifs "Pop-up" intégrés au scroll.
 
 ---
 
-## 🛠️ Architecture & Stack Technique
+## ⚙️ Architecture & Moteur d'Ingestion
 
-Le projet est structuré en **Monorepo** utilisant **Turborepo** et **pnpm workspaces**.
+Le projet repose sur un **Monorepo** (Turborepo) strict.
 
-### 📂 Structure du Projet
+### Le "Quality Gate" (Ingestion Wikipédia)
+Pour garantir une expérience type "TikTok", le backend (`apps/api`) ne sert pas le contenu brut de Wikipédia. Il utilise un **WikiIngestService** qui :
+* Interroge l'API `fr.wikipedia.org` par lots.
+* **Filtre drastiquement** : Rejette automatiquement tout article sans image haute résolution (`thumbnail`) ou avec un résumé trop court.
+* **Smart Caching** : Stocke les articles valides en base de données locale (PostgreSQL) pour servir l'application instantanément sans latence API.
+
+### 📂 Structure du Monorepo
 
 ```bash
 .
 ├── apps
-│   ├── mobile          # React Native (Expo SDK 50+)
-│   └── api             # NestJS (Backend REST API)
+│   ├── mobile          # React Native (Expo SDK 50, Router v3)
+│   └── api             # NestJS + TypeORM (Postgres)
+│       └── src
+│           ├── wiki    # Service d'ingestion & filtrage Wikipedia
+│           ├── cards   # Gestion des fiches et du Feed
+│           └── auth    # Authentification (Argon2 + JWT)
 ├── packages
-│   ├── shared          # Types TypeScript partagés (DTOs, Interfaces)
-│   ├── config          # Configurations partagées (ESLint, TSConfig)
-│   └── ui              # (Optionnel) Composants UI partagés
-└── turbo.json          # Pipeline de build
-```
+│   ├── shared          # Interfaces TypeScript (ICard, DTOs) partagées
+│   └── config          # ESLint & TSConfig partagés
+└── turbo.json          # Pipeline de build & orchestration
