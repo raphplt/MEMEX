@@ -11,15 +11,19 @@
     "format": "prettier --write \"**/*.{ts,tsx,md}\""
   },
   "devDependencies": {
-    "turbo": "latest",
-    "prettier": "latest",
     "eslint": "latest",
+    "prettier": "latest",
+    "turbo": "latest",
     "typescript": "latest"
   },
   "workspaces": [
     "apps/*",
     "packages/*"
   ],
+  "overrides": {
+    "react": "19.1.0",
+    "react-dom": "19.1.0"
+  },
   "packageManager": "npm@11.3.0",
   "engines": {
     "node": ">=18"
